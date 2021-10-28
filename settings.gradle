@@ -1,0 +1,2 @@
+rootProject.name = "Frooit"
+include ':app'
