@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Frooit</string>
     <string name="favourites">Favourites</string>
+    <string name="banana">Banana</string>
 </resources>
