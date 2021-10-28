@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.frooit.R
+import com.giftech.frooit.core.utils.DummyData
 import com.giftech.frooit.databinding.ActivityHomeBinding
 import com.giftech.frooit.ui.favourites.FavouritesActivity
 
@@ -16,6 +18,14 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val adapter = ListFruitAdapter()
+        adapter.setList(DummyData.generateListFruit())
+
+        with(binding.rvFruit){
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            this.adapter = adapter
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
