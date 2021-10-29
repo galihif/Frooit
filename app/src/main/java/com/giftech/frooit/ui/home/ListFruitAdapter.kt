@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.giftech.frooit.databinding.ItemFruitBinding
-import com.giftech.frooit.domain.model.Fruit
+import com.giftech.frooit.core.domain.model.Fruit
 import com.giftech.frooit.ui.detail.DetailActivity
 import com.giftech.frooit.ui.detail.DetailActivity.Companion.EXTRA_FRUIT
 

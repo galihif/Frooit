@@ -1,4 +1,4 @@
-package com.giftech.frooit.domain.model
+package com.giftech.frooit.core.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,6 +1,6 @@
 package com.giftech.frooit.core.utils
 
-import com.giftech.frooit.domain.model.Fruit
+import com.giftech.frooit.core.domain.model.Fruit
 
 object DummyData {
 

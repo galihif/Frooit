@@ -2,8 +2,8 @@ package com.giftech.frooit.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.giftech.frooit.core.domain.model.Fruit
 import com.giftech.frooit.databinding.ActivityDetailBinding
-import com.giftech.frooit.domain.model.Fruit
 
 class DetailActivity : AppCompatActivity() {
 
