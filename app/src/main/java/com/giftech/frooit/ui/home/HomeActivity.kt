@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.frooit.R
 import com.giftech.frooit.core.data.Resource
+import com.giftech.frooit.core.ui.ListFruitAdapter
 import com.giftech.frooit.core.ui.ViewModelFactory
 import com.giftech.frooit.databinding.ActivityHomeBinding
 import com.giftech.frooit.ui.favourites.FavouritesActivity
