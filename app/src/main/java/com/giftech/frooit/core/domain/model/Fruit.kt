@@ -8,5 +8,6 @@ data class Fruit(
     var id:Int = 0,
     var name:String = "",
     var family:String = "",
-    var genus:String = ""
+    var genus:String = "",
+    var isFavorite:Boolean = false
 ):Parcelable
