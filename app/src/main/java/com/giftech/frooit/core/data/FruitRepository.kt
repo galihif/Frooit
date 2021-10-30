@@ -55,4 +55,17 @@ class FruitRepository private constructor(
         }.asLiveData()
     }
 
+    fun getFavoriteFruit():LiveData<List<Fruit>>{
+        return Transformations.map(localDataSource.getFavoriteFruit()){
+            DataMapper.mapEntitiesToDomain(it)
+        }
+    }
+
+    fun setFavoriteFruit(fruit:Fruit, state:Boolean){
+        val fruitEntity = DataMapper.mapDomainToEntity(fruit)
+        appExecutors.diskIO().execute{
+            localDataSource.setFavoriteFruit(fruitEntity, state)
+        }
+    }
+
 }
