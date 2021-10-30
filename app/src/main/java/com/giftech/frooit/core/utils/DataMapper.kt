@@ -27,4 +27,13 @@ object DataMapper {
             )
         }
 
+    fun mapDomainToEntity(input: Fruit) =
+        FruitEntity(
+            id = input.id,
+            name = input.name,
+            family = input.family,
+            genus = input.genus,
+            isFavorite = input.isFavorite
+        )
+
 }
