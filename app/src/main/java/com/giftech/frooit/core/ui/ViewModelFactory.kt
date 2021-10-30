@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.giftech.frooit.core.data.FruitRepository
 import com.giftech.frooit.core.di.Injection
 import com.giftech.frooit.ui.detail.DetailViewModel
+import com.giftech.frooit.ui.favourites.FavouritesViewModel
 import com.giftech.frooit.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val fruitRepository: FruitRepository)
@@ -35,6 +36,9 @@ class ViewModelFactory private constructor(private val fruitRepository: FruitRep
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(fruitRepository) as T
+            }
+            modelClass.isAssignableFrom(FavouritesViewModel::class.java) -> {
+                FavouritesViewModel(fruitRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
