@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.frooit.R
+import com.giftech.frooit.core.data.Resource
 import com.giftech.frooit.core.ui.ViewModelFactory
-import com.giftech.frooit.core.utils.DataMapper
 import com.giftech.frooit.databinding.ActivityHomeBinding
 import com.giftech.frooit.ui.favourites.FavouritesActivity
 
@@ -26,7 +27,11 @@ class HomeActivity : AppCompatActivity() {
         val adapter = ListFruitAdapter()
 
         viewModel.getListFruit().observe(this,{res ->
-            adapter.setList(DataMapper.mapResponseToDomain(res))
+            when(res){
+                is Resource.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show()
+                is Resource.Error -> Toast.makeText(this, res.message, Toast.LENGTH_LONG).show()
+                is Resource.Success -> adapter.setList(res.data!!)
+            }
         })
 
         with(binding.rvFruit){
