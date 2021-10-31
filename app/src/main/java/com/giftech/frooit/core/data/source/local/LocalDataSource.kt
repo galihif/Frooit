@@ -1,8 +1,8 @@
 package com.giftech.frooit.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.giftech.frooit.core.data.source.local.entity.FruitEntity
 import com.giftech.frooit.core.data.source.local.room.FruitDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val fruitDao: FruitDao) {
 
@@ -15,11 +15,11 @@ class LocalDataSource private constructor(private val fruitDao: FruitDao) {
             }
     }
 
-    fun getAllFruit(): LiveData<List<FruitEntity>> = fruitDao.getAllFruit()
+    fun getAllFruit(): Flow<List<FruitEntity>> = fruitDao.getAllFruit()
 
-    fun getFavoriteFruit(): LiveData<List<FruitEntity>> = fruitDao.getFavoriteFruit()
+    fun getFavoriteFruit(): Flow<List<FruitEntity>> = fruitDao.getFavoriteFruit()
 
-    fun insertFruit(listFruit: List<FruitEntity>) = fruitDao.insertFruit(listFruit)
+    suspend fun insertFruit(listFruit: List<FruitEntity>) = fruitDao.insertFruit(listFruit)
 
     fun setFavoriteFruit(fruit: FruitEntity, newState: Boolean) {
         fruit.isFavorite = newState
