@@ -11,7 +11,7 @@ import com.giftech.frooit.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class FruitRepository private constructor(
+class FruitRepository(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors

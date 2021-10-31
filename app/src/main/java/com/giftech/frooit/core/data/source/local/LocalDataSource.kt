@@ -4,7 +4,7 @@ import com.giftech.frooit.core.data.source.local.entity.FruitEntity
 import com.giftech.frooit.core.data.source.local.room.FruitDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource private constructor(private val fruitDao: FruitDao) {
+class LocalDataSource(private val fruitDao: FruitDao) {
 
     companion object {
         private var instance: LocalDataSource? = null
