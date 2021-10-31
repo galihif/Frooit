@@ -1,7 +1,5 @@
 package com.giftech.frooit.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.giftech.frooit.core.data.source.local.LocalDataSource
 import com.giftech.frooit.core.data.source.remote.RemoteDataSource
 import com.giftech.frooit.core.data.source.remote.network.ApiResponse
@@ -10,6 +8,8 @@ import com.giftech.frooit.core.domain.model.Fruit
 import com.giftech.frooit.core.domain.repository.IFruitRepository
 import com.giftech.frooit.core.utils.AppExecutors
 import com.giftech.frooit.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class FruitRepository private constructor(
     private val localDataSource: LocalDataSource,
@@ -31,10 +31,10 @@ class FruitRepository private constructor(
             }
     }
 
-    override fun getListFruit():LiveData<Resource<List<Fruit>>>{
-        return object : NetworkBoundResource<List<Fruit>, List<FruitResponse>>(appExecutors){
-            override fun loadFromDB(): LiveData<List<Fruit>> {
-                return Transformations.map(localDataSource.getAllFruit()){
+    override fun getListFruit():Flow<Resource<List<Fruit>>>{
+        return object : NetworkBoundResource<List<Fruit>, List<FruitResponse>>(){
+            override fun loadFromDB(): Flow<List<Fruit>> {
+                return localDataSource.getAllFruit().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -43,21 +43,21 @@ class FruitRepository private constructor(
                 return data == null || data.isEmpty()
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<FruitResponse>>> {
+            override suspend fun createCall(): Flow<ApiResponse<List<FruitResponse>>> {
                 return remoteDataSource.getListFruit()
             }
 
-            override fun saveCallResult(data: List<FruitResponse>) {
+            override suspend fun saveCallResult(data: List<FruitResponse>) {
                 localDataSource.insertFruit(
                     DataMapper.mapResponseToEntity(data)
                 )
             }
 
-        }.asLiveData()
+        }.asFlow()
     }
 
-    override fun getFavoriteFruit():LiveData<List<Fruit>>{
-        return Transformations.map(localDataSource.getFavoriteFruit()){
+    override fun getFavoriteFruit():Flow<List<Fruit>>{
+        return localDataSource.getFavoriteFruit().map {
             DataMapper.mapEntitiesToDomain(it)
         }
     }
