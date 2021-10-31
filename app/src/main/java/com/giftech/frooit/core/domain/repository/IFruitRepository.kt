@@ -1,14 +1,14 @@
 package com.giftech.frooit.core.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.giftech.frooit.core.data.Resource
 import com.giftech.frooit.core.domain.model.Fruit
+import kotlinx.coroutines.flow.Flow
 
 interface IFruitRepository {
 
-    fun getListFruit(): LiveData<Resource<List<Fruit>>>
+    fun getListFruit(): Flow<Resource<List<Fruit>>>
 
-    fun getFavoriteFruit():LiveData<List<Fruit>>
+    fun getFavoriteFruit():Flow<List<Fruit>>
 
     fun setFavoriteFruit(fruit:Fruit, state:Boolean)
 
