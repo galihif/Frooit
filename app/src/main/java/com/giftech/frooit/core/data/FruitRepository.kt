@@ -7,6 +7,7 @@ import com.giftech.frooit.core.data.source.remote.RemoteDataSource
 import com.giftech.frooit.core.data.source.remote.network.ApiResponse
 import com.giftech.frooit.core.data.source.remote.response.FruitResponse
 import com.giftech.frooit.core.domain.model.Fruit
+import com.giftech.frooit.core.domain.repository.IFruitRepository
 import com.giftech.frooit.core.utils.AppExecutors
 import com.giftech.frooit.core.utils.DataMapper
 
@@ -14,7 +15,7 @@ class FruitRepository private constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors
-){
+):IFruitRepository{
 
     companion object {
         @Volatile
@@ -30,7 +31,7 @@ class FruitRepository private constructor(
             }
     }
 
-    fun getListFruit():LiveData<Resource<List<Fruit>>>{
+    override fun getListFruit():LiveData<Resource<List<Fruit>>>{
         return object : NetworkBoundResource<List<Fruit>, List<FruitResponse>>(appExecutors){
             override fun loadFromDB(): LiveData<List<Fruit>> {
                 return Transformations.map(localDataSource.getAllFruit()){
@@ -55,13 +56,13 @@ class FruitRepository private constructor(
         }.asLiveData()
     }
 
-    fun getFavoriteFruit():LiveData<List<Fruit>>{
+    override fun getFavoriteFruit():LiveData<List<Fruit>>{
         return Transformations.map(localDataSource.getFavoriteFruit()){
             DataMapper.mapEntitiesToDomain(it)
         }
     }
 
-    fun setFavoriteFruit(fruit:Fruit, state:Boolean){
+    override fun setFavoriteFruit(fruit:Fruit, state:Boolean){
         val fruitEntity = DataMapper.mapDomainToEntity(fruit)
         appExecutors.diskIO().execute{
             localDataSource.setFavoriteFruit(fruitEntity, state)

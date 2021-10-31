@@ -3,13 +3,13 @@ package com.giftech.frooit.core.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.giftech.frooit.core.data.FruitRepository
 import com.giftech.frooit.core.di.Injection
+import com.giftech.frooit.core.domain.usecase.FruitUseCase
 import com.giftech.frooit.ui.detail.DetailViewModel
 import com.giftech.frooit.ui.favourites.FavouritesViewModel
 import com.giftech.frooit.ui.home.HomeViewModel
 
-class ViewModelFactory private constructor(private val fruitRepository: FruitRepository)
+class ViewModelFactory private constructor(private val fruitUseCase: FruitUseCase)
     : ViewModelProvider.NewInstanceFactory(){
 
     companion object {
@@ -21,7 +21,7 @@ class ViewModelFactory private constructor(private val fruitRepository: FruitRep
                 ?: synchronized(this) {
                     instance
                         ?: ViewModelFactory(
-                            Injection.provideRepository(
+                            Injection.provideUseCase(
                                 context
                             )
                         )
@@ -32,13 +32,13 @@ class ViewModelFactory private constructor(private val fruitRepository: FruitRep
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(fruitRepository) as T
+                HomeViewModel(fruitUseCase) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(fruitRepository) as T
+                DetailViewModel(fruitUseCase) as T
             }
             modelClass.isAssignableFrom(FavouritesViewModel::class.java) -> {
-                FavouritesViewModel(fruitRepository) as T
+                FavouritesViewModel(fruitUseCase) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

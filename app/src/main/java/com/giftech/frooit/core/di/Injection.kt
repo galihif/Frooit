@@ -6,11 +6,14 @@ import com.giftech.frooit.core.data.source.local.LocalDataSource
 import com.giftech.frooit.core.data.source.local.room.FruitDatabase
 import com.giftech.frooit.core.data.source.remote.RemoteDataSource
 import com.giftech.frooit.core.data.source.remote.network.ApiConfig
+import com.giftech.frooit.core.domain.repository.IFruitRepository
+import com.giftech.frooit.core.domain.usecase.FruitInteractor
+import com.giftech.frooit.core.domain.usecase.FruitUseCase
 import com.giftech.frooit.core.utils.AppExecutors
 
 object Injection {
 
-    fun provideRepository(context: Context):FruitRepository{
+    fun provideRepository(context: Context): IFruitRepository {
         val database = FruitDatabase.getInstance(context)
 
         val localDataSource = LocalDataSource.getInstance(database.fruitDao())
@@ -18,6 +21,11 @@ object Injection {
         val appExecutors = AppExecutors()
 
         return FruitRepository.getInstance(localDataSource,remoteDataSource, appExecutors)
+    }
+
+    fun provideUseCase(context: Context):FruitUseCase{
+        val repository = provideRepository(context)
+        return FruitInteractor(repository)
     }
 
 }
