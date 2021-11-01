@@ -32,7 +32,11 @@ class ListFruitAdapter: RecyclerView.Adapter<ListFruitAdapter.ListFruitViewHolde
 
     inner class ListFruitViewHolder(val binding: ItemFruitBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(fruit: Fruit){
-            binding.tvName.text = fruit.name
+            with(binding){
+                tvName.text = fruit.name
+                tvFamily.text = fruit.family
+                tvGenus.text = fruit.genus
+            }
         }
 
         init {
