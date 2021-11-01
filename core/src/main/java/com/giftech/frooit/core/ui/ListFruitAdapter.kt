@@ -35,7 +35,6 @@ class ListFruitAdapter: RecyclerView.Adapter<ListFruitAdapter.ListFruitViewHolde
             with(binding){
                 tvName.text = fruit.name
                 tvFamily.text = fruit.family
-                tvGenus.text = fruit.genus
             }
         }
 
