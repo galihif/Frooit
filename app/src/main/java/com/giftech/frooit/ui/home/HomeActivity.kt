@@ -35,9 +35,9 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.fruit.observe(this,{ res ->
             when(res){
-                is Resource.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show()
-                is Resource.Error -> Toast.makeText(this, res.message, Toast.LENGTH_LONG).show()
-                is Resource.Success -> adapter.setList(res.data!!)
+                is com.giftech.frooit.core.data.Resource.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show()
+                is com.giftech.frooit.core.data.Resource.Error -> Toast.makeText(this, res.message, Toast.LENGTH_LONG).show()
+                is com.giftech.frooit.core.data.Resource.Success -> adapter.setList(res.data!!)
             }
         })
 
