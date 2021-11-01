@@ -1,6 +1,7 @@
 package com.giftech.frooit.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,7 +13,6 @@ import com.giftech.frooit.core.data.Resource
 import com.giftech.frooit.core.ui.ListFruitAdapter
 import com.giftech.frooit.databinding.ActivityHomeBinding
 import com.giftech.frooit.ui.detail.DetailActivity
-import com.giftech.frooit.ui.favourites.FavouritesActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -35,9 +35,9 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.fruit.observe(this,{ res ->
             when(res){
-                is com.giftech.frooit.core.data.Resource.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show()
-                is com.giftech.frooit.core.data.Resource.Error -> Toast.makeText(this, res.message, Toast.LENGTH_LONG).show()
-                is com.giftech.frooit.core.data.Resource.Success -> adapter.setList(res.data!!)
+                is Resource.Loading -> Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show()
+                is Resource.Error -> Toast.makeText(this, res.message, Toast.LENGTH_LONG).show()
+                is Resource.Success -> adapter.setList(res.data!!)
             }
         })
 
@@ -55,8 +55,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.item_favourite -> {
-                val intent = Intent(this, FavouritesActivity::class.java)
-                startActivity(intent)
+                val uri = Uri.parse("frooit://favourites")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
             }
         }
         return super.onOptionsItemSelected(item)

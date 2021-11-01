@@ -1,4 +1,4 @@
-package com.giftech.frooit.ui.favourites
+package com.giftech.frooit.favourites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
