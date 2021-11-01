@@ -12,6 +12,7 @@ import com.giftech.frooit.ui.detail.DetailActivity.Companion.EXTRA_FRUIT
 class ListFruitAdapter: RecyclerView.Adapter<ListFruitAdapter.ListFruitViewHolder>() {
 
     private var listFruit = ArrayList<Fruit>()
+    var onItemClick: ((Fruit) -> Unit)? = null
 
     fun setList(list:List<Fruit>){
         listFruit.clear()
@@ -34,10 +35,11 @@ class ListFruitAdapter: RecyclerView.Adapter<ListFruitAdapter.ListFruitViewHolde
     inner class ListFruitViewHolder(val binding: ItemFruitBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(fruit: Fruit){
             binding.tvName.text = fruit.name
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java)
-                intent.putExtra(EXTRA_FRUIT, fruit)
-                itemView.context.startActivity(intent)
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(listFruit[adapterPosition])
             }
         }
     }

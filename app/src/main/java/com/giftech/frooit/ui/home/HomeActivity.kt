@@ -11,6 +11,7 @@ import com.giftech.frooit.R
 import com.giftech.frooit.core.data.Resource
 import com.giftech.frooit.core.ui.ListFruitAdapter
 import com.giftech.frooit.databinding.ActivityHomeBinding
+import com.giftech.frooit.ui.detail.DetailActivity
 import com.giftech.frooit.ui.favourites.FavouritesActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,9 +25,13 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val factory = ViewModelFactory.getInstance(this)
-//        val viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
         val adapter = ListFruitAdapter()
+
+        adapter.onItemClick = {selectedData ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_FRUIT, selectedData)
+            startActivity(intent)
+        }
 
         viewModel.fruit.observe(this,{ res ->
             when(res){

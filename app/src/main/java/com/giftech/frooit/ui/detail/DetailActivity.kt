@@ -16,9 +16,6 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val factory = ViewModelFactory.getInstance(this)
-//        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
-
         if(intent != null){
             val extras = intent.extras
             val fruit = extras?.getParcelable<Fruit>(EXTRA_FRUIT)
