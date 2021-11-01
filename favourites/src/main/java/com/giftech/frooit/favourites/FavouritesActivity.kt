@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.giftech.frooit.core.ui.ListFruitAdapter
-import com.giftech.frooit.databinding.ActivityFavouritesBinding
+import com.giftech.frooit.favourites.databinding.ActivityFavouritesBinding
 import com.giftech.frooit.ui.detail.DetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
