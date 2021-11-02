@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Fruit Name:"/>
+        android:text="@string/fruit_name"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
-        android:text="Family:"/>
+        android:text="@string/family"/>
     <TextView
         android:id="@+id/tv_family"
         android:layout_width="wrap_content"
@@ -38,16 +38,16 @@
         android:gravity="center_vertical"
         android:paddingHorizontal="8dp"
         android:paddingVertical="4dp"
-        android:text="Family"
+        tools:text="Family"
         android:textColor="@color/green_500"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
-        android:text="Genus:"/>
+        tools:text="Genus:"/>
     <TextView
         android:id="@+id/tv_genus"
         android:layout_width="wrap_content"
@@ -58,9 +58,9 @@
         android:gravity="center_vertical"
         android:paddingHorizontal="8dp"
         android:paddingVertical="4dp"
-        android:text="Genus"
+        tools:text="Genus"
         android:textColor="@color/lightblue_500"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold" />
 
     <Button

@@ -4,4 +4,6 @@
     <string name="banana">Banana</string>
     <string name="add_to_favourites">Add To Favourites</string>
     <string name="title_favourites">Favourites</string>
+    <string name="fruit_name">Fruit Name:</string>
+    <string name="family">Family:</string>
 </resources>
