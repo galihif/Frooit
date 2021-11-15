@@ -38,6 +38,9 @@ android {
         viewBinding = true
     }
     dynamicFeatures = [':favourites']
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
