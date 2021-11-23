@@ -8,6 +8,8 @@ import com.giftech.frooit.core.data.source.remote.RemoteDataSource
 import com.giftech.frooit.core.data.source.remote.network.ApiService
 import com.giftech.frooit.core.domain.repository.IFruitRepository
 import com.giftech.frooit.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -17,12 +19,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
-    factory { get<com.giftech.frooit.core.data.source.local.room.FruitDatabase>().fruitDao() }
+    factory { get<FruitDatabase>().fruitDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("giftech".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
-            com.giftech.frooit.core.data.source.local.room.FruitDatabase::class.java, "Fruit.db"
-        ).fallbackToDestructiveMigration().build()
+            FruitDatabase::class.java, "Fruit.db"
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
