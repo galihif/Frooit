@@ -10,6 +10,7 @@ import com.giftech.frooit.core.domain.repository.IFruitRepository
 import com.giftech.frooit.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -36,10 +37,16 @@ const val BASE_URL = "https://www.fruityvice.com/api/"
 
 val networkModule = module {
     single {
+        val hostname = "www.fruityvice.com"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/RNwUtLvbGWvI9P4kIRbB1+JXCua7dbJGsmDdXNCBHD8=")
+            .add(hostname, "sha256/jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
